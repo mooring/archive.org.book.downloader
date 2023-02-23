@@ -1,7 +1,7 @@
 # archive.org book downloader
 download books from archive.org 
 
-compiled binary file can be download from demo folder( get.exe ) or just click this link: https://github.com/mooring/archive.org.book.downloader/raw/main/demo/get.exe
+compiled binary file can be download from [demo folder( get.exe )](https://github.com/mooring/archive.org.book.downloader/blob/main/demo/get.exe) or just click this link: https://github.com/mooring/archive.org.book.downloader/raw/main/demo/get.exe to **download**
 
 ![image](https://user-images.githubusercontent.com/1917297/220877106-3b5f3d12-7fc4-456e-8a93-856ff578c196.png)
 
