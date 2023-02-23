@@ -30,7 +30,7 @@ compiled binary file can be download from [demo folder( get.exe )](https://githu
 
 ![image](https://user-images.githubusercontent.com/1917297/220851488-26c212a3-b869-41f8-8135-dc455618d78c.png)
 
-### 6. run the program with get pages
+### 6. run the program to get pages
 - `get 1` get first page
 - `get 1 100` get pages from 1 to 100
 
