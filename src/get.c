@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <windows.h>
 
+#define VER            "0.21"
 #define HEADER_CAT     "\" -H \""
 #define USER_AGENT     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "\
                        "AppleWebKit/537.36 (KHTML, like Gecko) "\
@@ -109,13 +110,14 @@ void setupCookie(
   * @param/auth : configuated information for curl
   * @param/msg  : message to dispaly before download the page
   */
-void getImage(int page, char *host, char *auth[], char *msg)
+void downloadImage(int page, char *host, char *auth[], char *msg)
 {
     char str[3000] = {0};
     printf(
-        "getting image from leaf%03d.jpg %s" 
-        "\n----------------------------------------------------------\n",
-        page, msg
+        "getting \"%s\" pages from leaf%03d.jpg %s" 
+        "\n-------------------------------------------"
+        "--------------------------------------------\n",
+        auth[5], page, msg
     );
     sprintf(
         // prefix page sufix page authority ref cookie proxy
@@ -163,7 +165,7 @@ int getBookItem(FILE *fp, char *key, char (*val)[400])
   * @param/config : all configurations from config.conf file
   * 
   */
-void getBookAuthConf(char *config[8])
+void getBookAuthConf(char *config[9])
 {
     char buff[400]        = {0};
     char authority[100]   = {0};
@@ -174,6 +176,7 @@ void getBookAuthConf(char *config[8])
     char donationId[50]   = {0};
     char loanSign[50]     = {0};
     char loginSign[300]   = {0};
+    char bookTitle[300]   = {0};
     FILE *fp              = fopen("config.conf", "r");
 
     if(0 == getBookItem(fp, "authority", &buff)){
@@ -202,6 +205,9 @@ void getBookAuthConf(char *config[8])
     if(0 == getBookItem(fp, "sig", &buff)){
         sprintf(loginSign, "%s", buff);
     }
+    if(0 == getBookItem(fp, "title", &buff)){
+        sprintf(bookTitle, "%s", buff);
+    }
     strcpy(config[0], proxy);
     strcpy(config[1], authority);
     strcpy(config[2], bookId);
@@ -210,21 +216,22 @@ void getBookAuthConf(char *config[8])
     strcpy(config[5], donationId);
     strcpy(config[6], loanSign);
     strcpy(config[7], loginSign);
+    strcpy(config[8], bookTitle);
     fclose(fp);
 }
 /** @description: 
   *   configuration and curl prepare entry
   *
-  *   @param/conf : curl configurations for getImage
+  *   @param/conf : curl configurations for downloadImage
   *   @param/host : image host to be download
   */
-void setupAuth(char *conf[5], char (*host)[100])
+void setupAuth(char *conf[6], char (*host)[100])
 {
-    char prefix[2400]    = {0};
-    char suffix[200]     = {0};
-    char referer[200]    = {0};
-    char cookie[600]     = {0};
-    
+    char prefix[2400]     = {0};
+    char suffix[200]      = {0};
+    char referer[200]     = {0};
+    char cookie[600]      = {0};
+   
     char authority[100]   = {0};
     char proxy[100]       = {0};
     char bookId[50]       = {0};
@@ -233,10 +240,11 @@ void setupAuth(char *conf[5], char (*host)[100])
     char donationId[50]   = {0};
     char loanSign[50]     = {0};
     char loginSign[300]   = {0};
-    char *bookConf[8] = {
+    char bookTitle[300]   = {0};
+    char *bookConf[9] = {
         proxy, authority, bookId, 
         user, sessionId, donationId,
-        loanSign, loginSign
+        loanSign, loginSign, bookTitle
     };
     getBookAuthConf(bookConf);
     sprintf(*host, authority);
@@ -254,6 +262,7 @@ void setupAuth(char *conf[5], char (*host)[100])
     strcpy(conf[2], referer);
     strcpy(conf[3], cookie);
     strcpy(conf[4], proxy);
+    strcpy(conf[5], bookTitle);
 }
 
 int main(int argc, char *argv[])
@@ -265,38 +274,38 @@ int main(int argc, char *argv[])
     char cookie[600]     = {0};
     char proxy[100]      = {0};
     char host[100]       = {0};
+    char title[300]      = {0};
     char msg[100]        = {0};
-    char *conf[5]        = {prefix, suffix, referer, cookie, proxy};
+    char *conf[6]        = {prefix, suffix, referer, cookie, proxy, title};
     
     setupAuth(conf, &host);
-    
+    puts("\narchive.org book downloader version " VER " by mooring[at]live.com\n" );
     if(argc == 1)
     {
-        printf("%s start/start end", argv[0]);
+        printf("%s start/start end\n", argv[0]);
     }
     else if(argc == 2)
     {
         start = atoi(argv[1]);
         sprintf(
             msg, 
-            "to leaf%03d of %d/%d",
+            "to leaf%03d [%d/%d]",
             start, 1, 1
         );
-        getImage(start, host, conf, msg);
+        downloadImage(start, host, conf, msg);
     }
     else
     {
         if(argc == 3){
             start = atoi(argv[1]);
             end   = atoi(argv[2]);
-            printf("getting page %d - %d\n", start, end);
             for(i=start; i<end+1; i++){
                 sprintf(
                     msg, 
-                    "to leaf%03d of %d/%d", 
+                    "to leaf%03d [%d/%d]", 
                     end, ++j, end-start+1
                 );
-                getImage(i, host, conf, msg);
+                downloadImage(i, host, conf, msg);
             }
         }
     }
