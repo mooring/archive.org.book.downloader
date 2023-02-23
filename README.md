@@ -6,7 +6,7 @@ download books from archive.org
 ### 1. first download Tampermonkey 
 - https://www.tampermonkey.net/
 
-### 2. install archive archiveOrgAssistant
+### 2. install archiveOrgAssistant script
 - https://greasyfork.org/en/scripts/460562-archiveorgassistant
 
 ### 3. pick a book from archive.org
