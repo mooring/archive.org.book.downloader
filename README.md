@@ -1,4 +1,4 @@
-# archive.org.book.downloader
+# archive.org book downloader
 download books from archive.org
 ![image](https://user-images.githubusercontent.com/1917297/220851296-310e2c11-c2b3-4431-8a5d-1c1f67566e34.png)
 
