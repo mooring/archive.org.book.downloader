@@ -19,7 +19,7 @@ compiled binary file can be download from [demo folder( get.exe )](https://githu
 ### 4. compile the program from source code
 -  `cl get.c`
 
-![image](https://user-images.githubusercontent.com/1917297/220851364-f340dfe9-4c42-42c5-bd71-10e3d4832c9f.png)
+![image](https://user-images.githubusercontent.com/1917297/220957059-90399112-ac0c-4758-a857-501b1f6b2f5d.png)
 
 
 ### 5. download the configuration
@@ -34,7 +34,7 @@ compiled binary file can be download from [demo folder( get.exe )](https://githu
 - `get 1` get first page
 - `get 1 100` get pages from 1 to 100
 
-![image](https://user-images.githubusercontent.com/1917297/220851296-310e2c11-c2b3-4431-8a5d-1c1f67566e34.png)
+![image](https://user-images.githubusercontent.com/1917297/220956965-afd84808-e59a-4859-8be7-8e20838eb973.png)
 
 ### enjoy
 
