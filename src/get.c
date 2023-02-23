@@ -1,5 +1,5 @@
 // ******************************************************************
-// Copyright (c) mooring All rights reserved.
+// Copyright (c) mooring@live.com All rights reserved.
 // This code is licensed under the GNU GENERAL PUBLIC LICENSE Version 3.
 // THE CODE IS PROVIDED ?AS IS?, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
