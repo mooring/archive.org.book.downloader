@@ -57,6 +57,9 @@ void setupUrlInfo(
         "https://%s%s/%s/items/%s/%s_jp2.zip&file=%s_jp2/%s_",
         host, path, zipnum, bookId, bookId, bookId, bookId
     );
+    /*
+     * if you want to download smaller image , change the scale value from 1 to 2 4
+     */
     sprintf(
         *suffix,
         ".jp2&id=%s&scale=1&rotate=0",
