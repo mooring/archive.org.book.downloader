@@ -1,3 +1,15 @@
+// ******************************************************************
+// Copyright (c) mooring All rights reserved.
+// This code is licensed under the GNU GENERAL PUBLIC LICENSE Version 3.
+// THE CODE IS PROVIDED ?AS IS?, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE CODE OR THE USE OR OTHER DEALINGS IN THE CODE.
+// ******************************************************************
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -18,6 +30,16 @@
 
 #define COOKIES        COOKIE_AUTH
 #define URL            CURL_MAIN DEBUG HEADERS
+
+/**
+  * @description setup curl params: 
+  *     url's param:  prefix, suffix
+  *     header param: referer
+  * @param/host  : also the image domain
+  * @param/bookId: read from the config.conf file bookid
+  * @param/zipnum: the image page folder for zip param
+  * @param/page  : the sequence's page number to be download
+  */
 
 void setupUrlInfo(
     char (*prefix)[2400], 
@@ -46,26 +68,44 @@ void setupUrlInfo(
         bookId, page
     );
 }
+
+/** @description: 
+  *   prepare the curl cookie to download a the book page
+  *
+  * @param/bookId    : read from the config.conf file bookid
+  * @param/donationId: read from the config.conf file donation
+  * @param/sessionId : read from the config.conf file PHPSESSID
+  * @param/loginSign : read from the config.conf file sig
+  * @param/loanSign  : read from the config.conf file loan
+  * @param/user      : read from the config.conf file user
+  */
 void setupCookie(
     char (*cookie)[600],
     char *bookId,
     char *donationId,
-    char *phpSessionId, 
+    char *sessionId, 
     char *loginSign,
     char *loanSign,
-    char *email
+    char *user
 )
 {
     sprintf(*cookie, 
         "PHPSESSID=%s; donation-identifier=%s; "
         "logged-in-sig=%s; logged-in-user=%s; "
         "br-loan-%s=1; loan-%s=%s;",
-        phpSessionId, donationId,
-        loginSign, email, 
+        sessionId, donationId,
+        loginSign, user,
         bookId, bookId, loanSign
     );
 }
-
+/** @description: 
+  *   download the page to local
+  *
+  * @param/page : page to download
+  * @param/host : image host
+  * @param/auth : configuated information for curl
+  * @param/msg  : message to dispaly before download the page
+  */
 void getImage(int page, char *host, char *auth[], char *msg)
 {
     char str[3000] = {0};
@@ -84,7 +124,14 @@ void getImage(int page, char *host, char *auth[], char *msg)
     putchar('\n');
     Sleep(10);
 }
-
+/** @description: 
+  *   get config item from config.conf
+  *
+  * @param/key : key to get
+  * @param/val : value to write back
+  * 
+  * @return    : 0 success, 1 fail
+  */
 int getBookItem(FILE *fp, char *key, char (*val)[400])
 {
     int  ret = 1, max_read = 20, index = 0;
@@ -107,7 +154,12 @@ int getBookItem(FILE *fp, char *key, char (*val)[400])
     }
     return ret;
 }
-
+/** @description: 
+  *   get all config items from config.conf
+  *
+  * @param/config : all configurations from config.conf file
+  * 
+  */
 void getBookAuthConf(char *config[8])
 {
     char buff[400]        = {0};
@@ -157,7 +209,12 @@ void getBookAuthConf(char *config[8])
     strcpy(config[7], loginSign);
     fclose(fp);
 }
-
+/** @description: 
+  *   configuration and curl prepare entry
+  *
+  *   @param/conf : curl configurations for getImage
+  *   @param/host : image host to be download
+  */
 void setupAuth(char *conf[5], char (*host)[100])
 {
     char prefix[2400]    = {0};
