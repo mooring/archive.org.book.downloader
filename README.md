@@ -10,12 +10,13 @@ download books from archive.org
 ### 2. install archiveOrgAssistant script
 - https://greasyfork.org/en/scripts/460562-archiveorgassistant
 
-### 3. pick a book from archive.org
+### 3. pick a book from archive.org and borrow it for next step
 - https://archive.org/details/inlibrary
 
 
 ### 4. compile the program from source code
 -  `cl get.c`
+
 ![image](https://user-images.githubusercontent.com/1917297/220851364-f340dfe9-4c42-42c5-bd71-10e3d4832c9f.png)
 
 
@@ -24,6 +25,7 @@ download books from archive.org
 - in the popup menu, select "get Configuration" menu item
 - input the http proxy string if has any
 - save the config.conf to downloader(ie. get.exe) folder
+
 ![image](https://user-images.githubusercontent.com/1917297/220851488-26c212a3-b869-41f8-8135-dc455618d78c.png)
 
 ### 6. run the program with get pages
