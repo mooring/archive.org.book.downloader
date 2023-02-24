@@ -42,7 +42,7 @@
   * @param/page  : the sequence's page number to be download
   */
 
-void setupUrlInfo(
+static void setupUrlInfo(
     char (*prefix)[2400], 
     char (*suffix)[200], 
     char (*referer)[200],
@@ -83,7 +83,7 @@ void setupUrlInfo(
   * @param/loanSign  : read from the config.conf file loan
   * @param/user      : read from the config.conf file user
   */
-void setupCookie(
+static void setupCookie(
     char (*cookie)[600],
     char *bookId,
     char *donationId,
@@ -110,7 +110,7 @@ void setupCookie(
   * @param/auth : configuated information for curl
   * @param/msg  : message to dispaly before download the page
   */
-void downloadImage(int page, char *host, char *auth[], char *msg)
+static void downloadImage(int page, char *host, char *auth[], char *msg)
 {
     char str[3000] = {0};
     printf(
@@ -137,7 +137,7 @@ void downloadImage(int page, char *host, char *auth[], char *msg)
   * 
   * @return    : 0 success, 1 fail
   */
-int getBookItem(FILE *fp, char *key, char (*val)[400])
+static int getBookItem(FILE *fp, char *key, char (*val)[400])
 {
     int  ret = 1, max_read = 20, index = 0;
     char buff[400]   = {0};
@@ -165,7 +165,7 @@ int getBookItem(FILE *fp, char *key, char (*val)[400])
   * @param/config : all configurations from config.conf file
   * 
   */
-void getBookAuthConf(char *config[9])
+static void getBookAuthConf(char *config[9])
 {
     char buff[400]        = {0};
     char authority[100]   = {0};
@@ -225,7 +225,7 @@ void getBookAuthConf(char *config[9])
   *   @param/conf : curl configurations for downloadImage
   *   @param/host : image host to be download
   */
-void setupAuth(char *conf[6], char (*host)[100])
+static void setupAuth(char *conf[6], char (*host)[100])
 {
     char prefix[2400]     = {0};
     char suffix[200]      = {0};
@@ -279,7 +279,7 @@ int main(int argc, char *argv[])
     char *conf[6]        = {prefix, suffix, referer, cookie, proxy, title};
     
     setupAuth(conf, &host);
-    puts("\narchive.org book downloader version " VER " by mooring[at]live.com\n" );
+    puts("\narchive.org book downloader v" VER " by mooring[at]live.com\n" );
     if(argc == 1)
     {
         printf("%s start/start end\n", argv[0]);
