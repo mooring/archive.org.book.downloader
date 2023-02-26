@@ -1,8 +1,6 @@
 # archive.org book downloader
 download books from archive.org 
 
-compiled binary file can be download from [demo folder( get.exe )](https://github.com/mooring/archive.org.book.downloader/blob/main/demo/get.exe) or just click this link: https://github.com/mooring/archive.org.book.downloader/raw/main/demo/get.exe to **download**
-
 ![image](https://user-images.githubusercontent.com/1917297/220877106-3b5f3d12-7fc4-456e-8a93-856ff578c196.png)
 
 #### Full version "windows NT Shell Scripting" all pages were merged into a single pdf file can be **download** bellow:
@@ -36,9 +34,11 @@ password：8fle
 
 ### 6. run the program to get pages
 - `get 1` get first page
-- `get 1 100` get pages from 1 to 100
+- `get 100 103` get pages from 100 to 103
 
 ![image](https://user-images.githubusercontent.com/1917297/220956965-afd84808-e59a-4859-8be7-8e20838eb973.png)
+
+compiled binary file can be download from [demo folder( get.exe )](https://github.com/mooring/archive.org.book.downloader/blob/main/demo/get.exe) or just click this link: https://github.com/mooring/archive.org.book.downloader/raw/main/demo/get.exe to **download**
 
 ### enjoy
 
