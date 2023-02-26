@@ -38,7 +38,7 @@ password：8fle
 
 ![image](https://user-images.githubusercontent.com/1917297/220956965-afd84808-e59a-4859-8be7-8e20838eb973.png)
 
-compiled binary file **[get.exe](https://github.com/mooring/archive.org.book.downloader/blob/main/demo/get.exe)** can be [download](https://github.com/mooring/archive.org.book.downloader/blob/main/demo/get.exe) here 
+compiled binary file **[get.exe](https://github.com/mooring/archive.org.book.downloader/blob/main/demo/get.exe)** can be **[download](https://github.com/mooring/archive.org.book.downloader/blob/main/demo/get.exe) here** 
 just click this link: https://github.com/mooring/archive.org.book.downloader/raw/main/demo/get.exe to **download**
 
 ### enjoy
