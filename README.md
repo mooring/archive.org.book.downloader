@@ -3,7 +3,7 @@ download books from archive.org
 
 ![image](https://user-images.githubusercontent.com/1917297/220877106-3b5f3d12-7fc4-456e-8a93-856ff578c196.png)
 
-#### Full version "windows NT Shell Scripting" all pages were merged into a single pdf file can be **download** bellow:
+#### Full version "Windows NT Shell Scripting" all pages were merged into a single pdf file can be **download** bellow (demo):
 https://pan.baidu.com/s/1rmLvsn6hD57L3sb0NmSzYA
 password：8fle
 
