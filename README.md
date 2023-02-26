@@ -34,7 +34,7 @@ password：8fle
 
 ### 6. run the program to get pages
 - `get 1` get first page
-- `get 100 103` get pages from 100 to 103
+- `get 103 110` get pages from 103 to 110
 
 ![image](https://user-images.githubusercontent.com/1917297/220956965-afd84808-e59a-4859-8be7-8e20838eb973.png)
 
