@@ -42,7 +42,6 @@
   * @param/zipnum: the image page folder for zip param
   * @param/page  : the sequence's page number to be download
   */
-
 static void setupUrlInfo(
     char (*prefix)[2400], 
     char (*suffix)[200], 
@@ -60,7 +59,7 @@ static void setupUrlInfo(
         host, path, zipnum, bookId, bookId, bookId, bookId
     );
     /*
-     * if you want to download smaller image , change the scale value from 1 to 2 4
+     * if you want to download smaller image, change the scale 1 to 2 or 4
      */
     sprintf(
         *suffix,
@@ -103,6 +102,7 @@ static void setupCookie(
         bookId, bookId, loanSign
     );
 }
+
 /** @description: 
   *   download the page to local
   *
@@ -130,6 +130,7 @@ static void downloadImage(int page, char *host, char *auth[], char *msg)
     putchar('\n');
     Sleep(10);
 }
+
 /** @description: 
   *   get config item from config.conf
   *
@@ -160,6 +161,7 @@ static int getBookItem(FILE *fp, char *key, char (*val)[400])
     }
     return ret;
 }
+
 /** @description: 
   *   get all config items from config.conf
   *
@@ -220,6 +222,7 @@ static void getBookAuthConf(char *config[9])
     strcpy(config[8], bookTitle);
     fclose(fp);
 }
+
 /** @description: 
   *   configuration and curl prepare entry
   *
