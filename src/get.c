@@ -16,18 +16,19 @@
 #include <windows.h>
 
 #define VER            "0.21"
-#define HEADER_CAT     "\" -H \""
+#define HCAT           "\" -H \""
 #define USER_AGENT     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "\
                        "AppleWebKit/537.36 (KHTML, like Gecko) "\
                        "Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.50"
-#define HEADER_1       "accept: image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+#define HEADER_1       "accept: image/png,image/svg+xml,image/*,*/*;q=0.8"
 #define HEADER_2       "authority: %s"
 #define HEADER_3       "referer: %s"
-#define COOKIE_AUTH    "ol-auth-url=%%2F%%2Farchive.org%%2Fservices%%2Fborrow%%2FXXX%%3Fmode%%3Dauth"
+#define COOKIE_AUTH    "ol-auth-url=%%2F%%2Farchive.org%%2Fservices%%2Fborrow"\
+                       "%%2FXXX%%3Fmode%%3Dauth"
 
 #define DEBUG          " -A \"" USER_AGENT "\""
 #define CURL_MAIN      "curl \"%s%04d%s\" -o leaf%03d.jpg"
-#define HEADERS        " -H \"" HEADER_1 HEADER_CAT HEADER_2 HEADER_CAT HEADER_3 "\" "
+#define HEADERS        " -H \"" HEADER_1 HCAT HEADER_2 HCAT HEADER_3 "\" "
 
 #define COOKIES        COOKIE_AUTH
 #define URL            CURL_MAIN DEBUG HEADERS

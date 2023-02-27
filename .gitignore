@@ -52,3 +52,4 @@ dkms.conf
 *.conf
 src/*.exe
 src/*.obj
+src/*.jpg
