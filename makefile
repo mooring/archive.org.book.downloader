@@ -4,7 +4,7 @@ BIN = $(filter-out $(MBIN),$(patsubst obj/%.o,bin/%,$(OBJ)))
 
 .PHONY: all
 
-all    : $(BIN)
+all    : $(BIN) init
 $(OBJ) : $(SRC)
 $(BIN) : $(OBJ)
 
@@ -15,6 +15,10 @@ bin/%: obj/%.o
 
 init:
 	mkdir -p bin obj
+
+demo: all
+	cp bin/get demo/get
+
 
 clean:
 	rm -f obj/* bin/*

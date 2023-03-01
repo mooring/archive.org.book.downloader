@@ -190,6 +190,14 @@ static void getBookAuthConf(char *config[9])
     char bookTitle[300]   = {0};
     FILE *fp              = fopen("config.conf", "r");
 
+    if(fp == NULL){
+        puts(
+            "Error: config.conf file not found at current folder\n"
+            "please use archiveOrgAssistant script of Tempermonkey extension\n"
+            "to get the config.conf file and save it at current folder\n"
+        );
+        exit(-1);
+    }
     if(0 == getBookItem(fp, "authority", &buff)){
         sprintf(authority, "%s", buff);
     }
