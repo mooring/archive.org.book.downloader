@@ -13,7 +13,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
+#else
+#include <unistd.h>
+#endif
 
 #define VER            "0.21"
 #define HCAT           "\" -H \""
@@ -128,7 +132,11 @@ static void downloadImage(int page, char *host, char *auth[], char *msg)
     //printf("%s\n", str);
     system(str);
     putchar('\n');
+#if defined(_WIN32) || defined(_WIN64)
     Sleep(10);
+#else
+    sleep(100);
+#endif
 }
 
 /** @description: 
