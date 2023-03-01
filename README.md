@@ -5,7 +5,7 @@ download books from archive.org
 
 #### Full version "Windows NT Shell Scripting" download by this tool can be **download** bellow:
 
-- book url: https://pan.baidu.com/s/1rmLvsn6hD57L3sb0NmSzYA
+- book url: https://pan.baidu.com/s/1rmLvsn6hD57L3sb0NmSzYA?pwd=8fle
 - password：8fle
 - format: pdf (concat all of the pages to be a single pdf file)
 - size  : 192MB
