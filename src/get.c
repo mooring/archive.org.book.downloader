@@ -189,15 +189,6 @@ static void getBookAuthConf(char *config[9])
     char loginSign[300]   = {0};
     char bookTitle[300]   = {0};
     FILE *fp              = fopen("config.conf", "r");
-
-    if(fp == NULL){
-        puts(
-            "Error: config.conf file not found at current folder\n"
-            "please use archiveOrgAssistant script of Tempermonkey extension\n"
-            "to get the config.conf file and save it at current folder\n"
-        );
-        exit(-1);
-    }
     if(0 == getBookItem(fp, "authority", &buff)){
         sprintf(authority, "%s", buff);
     }
@@ -297,9 +288,19 @@ int main(int argc, char *argv[])
     char title[300]      = {0};
     char msg[100]        = {0};
     char *conf[6]        = {prefix, suffix, referer, cookie, proxy, title};
-    
-    setupAuth(conf, &host);
+    FILE *fp             = fopen("config.conf", "r");
     puts("\narchive.org book downloader v" VER " by mooring[at]live.com\n" );
+    if(fp == NULL){
+        printf(
+            "Error: config.conf file not found at current folder\n"
+            "please use archiveOrgAssistant script of Tempermonkey extension\n"
+            "put the config.conf file along with %s\n",
+            argv[0]
+        );
+        exit(404);
+    }
+    fclose(fp);
+    setupAuth(conf, &host);
     if(argc == 1)
     {
         printf("%s start/start end\n", argv[0]);
