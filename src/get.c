@@ -119,7 +119,7 @@ static void downloadImage(int page, char *host, char *auth[], char *msg)
 {
     char str[3000] = {0};
     printf(
-        "getting \"%s\" pages from leaf%03d.jpg %s" 
+        "getting \"%s\" pages from leaf%03d %s"
         "\n-------------------------------------------"
         "--------------------------------------------\n",
         auth[5], page, msg
@@ -176,13 +176,14 @@ static int getBookItem(FILE *fp, char *key, char (*val)[400])
   * @param/config : all configurations from config.conf file
   * 
   */
-static void getBookAuthConf(char *config[9])
+static void getBookAuthConf(char *config[10])
 {
     char buff[400]        = {0};
     char authority[100]   = {0};
     char proxy[100]       = {0};
     char bookId[50]       = {0};
     char user[50]         = {0};
+    char zipnum[50]       = {0};
     char sessionId[50]    = {0};
     char donationId[50]   = {0};
     char loanSign[50]     = {0};
@@ -196,6 +197,9 @@ static void getBookAuthConf(char *config[9])
         if(strlen(buff) > 0){
             sprintf(proxy, "--proxy \"%s\"", buff);
         }
+    }
+    if(0 == getBookItem(fp, "zipnum", &buff)){
+        sprintf(zipnum, "%s", buff);
     }
     if(0 == getBookItem(fp, "bookid", &buff)){
         sprintf(bookId, "%s", buff);
@@ -218,15 +222,17 @@ static void getBookAuthConf(char *config[9])
     if(0 == getBookItem(fp, "title", &buff)){
         sprintf(bookTitle, "%s", buff);
     }
+    
     strcpy(config[0], proxy);
-    strcpy(config[1], authority);
-    strcpy(config[2], bookId);
-    strcpy(config[3], user);
-    strcpy(config[4], sessionId);
-    strcpy(config[5], donationId);
-    strcpy(config[6], loanSign);
-    strcpy(config[7], loginSign);
-    strcpy(config[8], bookTitle);
+    strcpy(config[1], zipnum);
+    strcpy(config[2], authority);
+    strcpy(config[3], bookId);
+    strcpy(config[4], user);
+    strcpy(config[5], sessionId);
+    strcpy(config[6], donationId);
+    strcpy(config[7], loanSign);
+    strcpy(config[8], loginSign);
+    strcpy(config[9], bookTitle);
     fclose(fp);
 }
 
@@ -247,13 +253,14 @@ static void setupAuth(char *conf[6], char (*host)[100])
     char proxy[100]       = {0};
     char bookId[50]       = {0};
     char user[50]         = {0};
+    char zipnum[10]       = {0};
     char sessionId[50]    = {0};
     char donationId[50]   = {0};
     char loanSign[50]     = {0};
     char loginSign[300]   = {0};
     char bookTitle[300]   = {0};
-    char *bookConf[9] = {
-        proxy, authority, bookId, 
+    char *bookConf[10] = {
+        proxy, zipnum, authority, bookId, 
         user, sessionId, donationId,
         loanSign, loginSign, bookTitle
     };
@@ -261,12 +268,12 @@ static void setupAuth(char *conf[6], char (*host)[100])
     sprintf(*host, authority);
     setupCookie(
         &cookie, 
-        bookConf[2], bookConf[5], bookConf[4], 
-        bookConf[7], bookConf[6], bookConf[3]
+        bookId, donationId, sessionId, 
+        loginSign, loanSign, user
     );
     setupUrlInfo(
         &prefix, &suffix, &referer, 
-        bookConf[2], *host, "32", 400
+        authority, *host, zipnum, 400
     );
     strcpy(conf[0], prefix);
     strcpy(conf[1], suffix);
