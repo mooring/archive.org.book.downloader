@@ -49,6 +49,15 @@ download books from archive.org
 compiled binary file **[get.exe](https://github.com/mooring/archive.org.book.downloader/blob/main/demo/get.exe)** can be **[download](https://github.com/mooring/archive.org.book.downloader/blob/main/demo/get.exe) here** 
 just click this link: https://github.com/mooring/archive.org.book.downloader/raw/main/demo/get.exe to **download**
 
+### 7. use jpeg2pdf to merge pages into a pdf
+
+```bash
+jpeg2pdf.exe *.jpg -o book_name.pdf
+```
+
+jpeg2pdf can be download https://sourceforge.net/projects/jpeg2pdf/
+
+
 ### enjoy
 
 author: mooring
