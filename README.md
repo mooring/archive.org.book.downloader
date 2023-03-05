@@ -5,10 +5,15 @@ download books from archive.org
 
 #### Full version "Windows NT Shell Scripting" download by this tool can be **download** bellow:
 
-- book url: https://pan.baidu.com/s/1rmLvsn6hD57L3sb0NmSzYA?pwd=8fle
-- password：8fle
-- format: pdf (concat all of the pages to be a single pdf file)
-- size  : 192MB
+- book title: **Windows NT Shell Scripting**
+- book autho: Tim Hill
+- book format: pdf
+- book size : 192MB
+- book pages: 404
+- book url on baidu cloud: https://pan.baidu.com/s/1rmLvsn6hD57L3sb0NmSzYA?pwd=8fle
+- baidu cloud password：8fle
+- book url on aliyun cloud: https://www.aliyundrive.com/s/oFwUJpTQxV2
+- aliyun cloud password: a6w5
 
 
 ### 1. first download Tampermonkey 
