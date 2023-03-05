@@ -19,7 +19,7 @@
 #include <unistd.h>
 #endif
 
-#define VER            "0.21"
+#define VER            "0.22"
 #define HCAT           "\" -H \""
 #define USER_AGENT     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "\
                        "AppleWebKit/537.36 (KHTML, like Gecko) "\
@@ -129,7 +129,7 @@ static void downloadImage(int page, char *host, char *auth[], char *msg)
         str, URL "-H \"cookie: " COOKIES "; %s\" %s", 
         auth[0], page, auth[1], page, host, auth[2], auth[3], auth[4]
     );
-    //printf("%s\n", str);
+    // printf("%s\n", str);
     system(str);
     putchar('\n');
 #if defined(_WIN32) || defined(_WIN64)
@@ -273,7 +273,7 @@ static void setupAuth(char *conf[6], char (*host)[100])
     );
     setupUrlInfo(
         &prefix, &suffix, &referer, 
-        authority, *host, zipnum, 400
+        bookId, *host, zipnum, 400
     );
     strcpy(conf[0], prefix);
     strcpy(conf[1], suffix);
