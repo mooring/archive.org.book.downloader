@@ -19,11 +19,11 @@
 #include <unistd.h>
 #endif
 
-#define VER            "0.22"
+#define VER            "0.24"
 #define HCAT           "\" -H \""
 #define USER_AGENT     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "\
                        "AppleWebKit/537.36 (KHTML, like Gecko) "\
-                       "Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.50"
+                       "Chrome/127.0.0.0 Safari/537.36 Edg/127.0.1587.50"
 #define HEADER_1       "accept: image/png,image/svg+xml,image/*,*/*;q=0.8"
 #define HEADER_2       "authority: %s"
 #define HEADER_3       "referer: %s"
@@ -108,38 +108,6 @@ static void setupCookie(
 }
 
 /** @description: 
-  *   download the page to local
-  *
-  * @param/page : page to download
-  * @param/host : image host
-  * @param/auth : configuated information for curl
-  * @param/msg  : message to dispaly before download the page
-  */
-static void downloadImage(int page, char *host, char *auth[], char *msg)
-{
-    char str[3000] = {0};
-    printf(
-        "getting \"%s\" pages from leaf%03d %s"
-        "\n-------------------------------------------"
-        "--------------------------------------------\n",
-        auth[5], page, msg
-    );
-    sprintf(
-        // prefix page sufix page authority ref cookie proxy
-        str, URL "-H \"cookie: " COOKIES "; %s\" %s", 
-        auth[0], page, auth[1], page, host, auth[2], auth[3], auth[4]
-    );
-    // printf("%s\n", str);
-    system(str);
-    putchar('\n');
-#if defined(_WIN32) || defined(_WIN64)
-    Sleep(10);
-#else
-    sleep(100);
-#endif
-}
-
-/** @description: 
   *   get config item from config.conf
   *
   * @param/key : key to get
@@ -171,6 +139,48 @@ static int getBookItem(FILE *fp, char *key, char (*val)[400])
 }
 
 /** @description: 
+  *   download the page to local
+  *
+  * @param/page : page to download
+  * @param/host : image host
+  * @param/auth : configuated information for curl
+  * @param/msg  : message to dispaly before download the page
+  */
+static void downloadImage(int page, char *host, char *auth[], char *msg)
+{
+    char str[3000] = {0};
+    char buff[50] = {0};
+    char userName[50] = {0};
+    FILE *fp = fopen("config.conf", "r");
+
+    printf(
+        "getting \"%s\" pages from leaf%03d %s"
+        "\n-------------------------------------------"
+        "--------------------------------------------\n",
+        auth[5], page, msg
+    );
+    if(0 == getBookItem(fp, "br-resume", &buff)){
+        sprintf(userName, "%s", buff);
+    }
+    fclose(fp);
+    sprintf(
+        // prefix page sufix page authority ref cookie proxy
+        str, URL "-H \"cookie: " COOKIES "; %s; loan-%s=%d\" %s", 
+        auth[0], page, auth[1], page, host, auth[2], auth[3], userName, page, auth[4]
+    );
+    // printf("%s\n", str);
+    system(str);
+    putchar('\n');
+#if defined(_WIN32) || defined(_WIN64)
+    Sleep(10);
+#else
+    sleep(10);
+#endif
+}
+
+
+
+/** @description: 
   *   get all config items from config.conf
   *
   * @param/config : all configurations from config.conf file
@@ -189,6 +199,9 @@ static void getBookAuthConf(char *config[10])
     char loanSign[50]     = {0};
     char loginSign[300]   = {0};
     char bookTitle[300]   = {0};
+    char *p40             = NULL;
+    char userName[50]     = {0};
+
     FILE *fp              = fopen("config.conf", "r");
     if(0 == getBookItem(fp, "authority", &buff)){
         sprintf(authority, "%s", buff);
@@ -207,6 +220,7 @@ static void getBookAuthConf(char *config[10])
     if(0 == getBookItem(fp, "user", &buff)){
         sprintf(user, "%s", buff);
     }
+
     if(0 == getBookItem(fp, "PHPSESSID", &buff)){
         sprintf(sessionId, "%s", buff);
     }
@@ -222,7 +236,7 @@ static void getBookAuthConf(char *config[10])
     if(0 == getBookItem(fp, "title", &buff)){
         sprintf(bookTitle, "%s", buff);
     }
-    
+
     strcpy(config[0], proxy);
     strcpy(config[1], zipnum);
     strcpy(config[2], authority);
