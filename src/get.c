@@ -149,7 +149,7 @@ static int getBookItem(FILE *fp, char *key, char (*val)[400])
 static void downloadImage(int page, char *host, char *auth[], char *msg)
 {
     char str[3000] = {0};
-    char buff[50] = {0};
+    char buff[400] = {0};
     char userName[50] = {0};
     FILE *fp = fopen("config.conf", "r");
 
