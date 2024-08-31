@@ -12,8 +12,6 @@ download books from archive.org
 - book pages: 404
 - book url on baidu cloud: https://pan.baidu.com/s/1rmLvsn6hD57L3sb0NmSzYA?pwd=8fle
 - baidu cloud password：8fle
-- book url on aliyun cloud: https://www.aliyundrive.com/s/oFwUJpTQxV2
-- aliyun cloud password: a6w5
 
 
 ### 1. first download Tampermonkey 
