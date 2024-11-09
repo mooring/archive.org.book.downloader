@@ -2,6 +2,7 @@ SRC = $(wildcard src/*.c)
 OBJ = $(filter-out $(MOBJ),$(patsubst src/%.c,obj/%.o,$(SRC)))
 BIN = $(filter-out $(MBIN),$(patsubst obj/%.o,demo/%,$(OBJ)))
 
+
 .PHONY: all
 
 all    : $(BIN) init

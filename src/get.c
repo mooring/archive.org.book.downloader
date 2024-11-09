@@ -19,7 +19,7 @@
 #include <unistd.h>
 #endif
 
-#define VER            "0.24"
+#define VER            "0.25"
 #define HCAT           "\" -H \""
 #define USER_AGENT     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "\
                        "AppleWebKit/537.36 (KHTML, like Gecko) "\
@@ -34,7 +34,6 @@
 #define CURL_MAIN      "curl \"%s%04d%s\" -o leaf%03d.jpg"
 #define HEADERS        " -H \"" HEADER_1 HCAT HEADER_2 HCAT HEADER_3 "\" "
 
-#define COOKIES        COOKIE_AUTH
 #define URL            CURL_MAIN DEBUG HEADERS
 
 /**
@@ -88,7 +87,7 @@ static void setupUrlInfo(
   * @param/user      : read from the config.conf file user
   */
 static void setupCookie(
-    char (*cookie)[600],
+    char (*cookie)[1200],
     char *bookId,
     char *donationId,
     char *sessionId, 
@@ -148,7 +147,7 @@ static int getBookItem(FILE *fp, char *key, char (*val)[400])
   */
 static void downloadImage(int page, char *host, char *auth[], char *msg)
 {
-    char str[3000] = {0};
+    char str[4000] = {0};
     char buff[400] = {0};
     char userName[50] = {0};
     FILE *fp = fopen("config.conf", "r");
@@ -165,8 +164,8 @@ static void downloadImage(int page, char *host, char *auth[], char *msg)
     fclose(fp);
     sprintf(
         // prefix page sufix page authority ref cookie proxy
-        str, URL "-H \"cookie: " COOKIES "; %s; loan-%s=%d\" %s", 
-        auth[0], page, auth[1], page, host, auth[2], auth[3], userName, page, auth[4]
+        str, URL "-H \"cookie: %s\" %s", 
+        auth[0], page, auth[1], page, host, auth[2], auth[3], auth[4]
     );
     // printf("%s\n", str);
     system(str);
@@ -196,8 +195,8 @@ static void getBookAuthConf(char *config[10])
     char zipnum[50]       = {0};
     char sessionId[50]    = {0};
     char donationId[50]   = {0};
-    char loanSign[50]     = {0};
-    char loginSign[300]   = {0};
+    char loanSign[80]     = {0};
+    char loginSign[400]   = {0};
     char bookTitle[300]   = {0};
     char *p40             = NULL;
     char userName[50]     = {0};
@@ -261,7 +260,7 @@ static void setupAuth(char *conf[6], char (*host)[100])
     char prefix[2400]     = {0};
     char suffix[200]      = {0};
     char referer[200]     = {0};
-    char cookie[600]      = {0};
+    char cookie[1200]      = {0};
    
     char authority[100]   = {0};
     char proxy[100]       = {0};
@@ -270,8 +269,8 @@ static void setupAuth(char *conf[6], char (*host)[100])
     char zipnum[10]       = {0};
     char sessionId[50]    = {0};
     char donationId[50]   = {0};
-    char loanSign[50]     = {0};
-    char loginSign[300]   = {0};
+    char loanSign[80]     = {0};
+    char loginSign[400]   = {0};
     char bookTitle[300]   = {0};
     char *bookConf[10] = {
         proxy, zipnum, authority, bookId, 
@@ -289,12 +288,14 @@ static void setupAuth(char *conf[6], char (*host)[100])
         &prefix, &suffix, &referer, 
         bookId, *host, zipnum, 400
     );
+    // printf("292\nprefix=%s\nsuffix=%s\nrefer=%s\ncookie=%s\nproxy=%s\ntitle=%s\n", prefix, suffix, referer, cookie, proxy, bookTitle);
     strcpy(conf[0], prefix);
     strcpy(conf[1], suffix);
     strcpy(conf[2], referer);
     strcpy(conf[3], cookie);
     strcpy(conf[4], proxy);
     strcpy(conf[5], bookTitle);
+    // printf("299\nprefix=%s\nsuffix=%s\nrefer=%s\ncookie=%s\nproxy=%s\ntitle=%s\n", conf[0], conf[1], conf[2], conf[2], conf[3], conf[4], conf[5]);
 }
 
 int main(int argc, char *argv[])
@@ -303,7 +304,7 @@ int main(int argc, char *argv[])
     char prefix[2400]    = {0};
     char suffix[200]     = {0};
     char referer[200]    = {0};
-    char cookie[600]     = {0};
+    char cookie[1200]     = {0};
     char proxy[100]      = {0};
     char host[100]       = {0};
     char title[300]      = {0};

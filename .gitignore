@@ -51,6 +51,11 @@ Mkfile.old
 dkms.conf
 *.conf
 dos/*
+.idea/
+.history/
+.vscode/
 src/*.exe
 src/*.obj
 src/*.jpg
+stdc/*
+
